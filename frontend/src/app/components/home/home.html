@@ -1,0 +1,19 @@
+<div class="home-container">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h2 class="logo">Event Planner</h2>
+            <button class="btn-logout" (click)="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="home-content">
+        <div class="welcome-card">
+            <div class="welcome-icon">👋</div>
+            <h1>Hi {{ userEmail() }}</h1>
+            <p class="welcome-message">Welcome to Event Planner!</p>
+            <div class="info-box">
+                <p>You're successfully logged in and ready to start planning your events.</p>
+            </div>
+        </div>
+    </div>
+</div>
