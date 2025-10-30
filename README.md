@@ -51,7 +51,7 @@ cd backend
 pip install -r requirements.txt
 ```
 
-3. Configure environment variables (`.env` file is already set up):
+3. Configure environment variables (`.env`):
 ```env
 MONGO_URI=your_mongodb_connection_string
 DATABASE_NAME=eventplanner
@@ -101,12 +101,6 @@ Frontend will run at: **http://localhost:4200**
   username: user@example.com
   password: password123
   ```
-
-- **GET** `/auth/me` - Get current user (requires auth token)
-  ```
-  Authorization: Bearer <token>
-  ```
-
 ## 🎨 Frontend Pages
 
 1. **Login Page** (`/login`) - User authentication
