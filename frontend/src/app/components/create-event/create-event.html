@@ -1,0 +1,93 @@
+<div class="create-event-container">
+  <div class="form-wrapper">
+    <div class="form-header">
+      <h1>✨ Create New Event</h1>
+      <p>Fill in the details to create your event</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #eventForm="ngForm">
+      <!-- Title -->
+      <div class="form-group">
+        <label for="title">Event Title *</label>
+        <input type="text" id="title" name="title" [(ngModel)]="title" placeholder="e.g., Team Building Workshop"
+          required minlength="3" #titleField="ngModel" [class.invalid]="titleField.invalid && titleField.touched">
+        @if (titleField.invalid && titleField.touched) {
+        <div class="error-text">
+          @if (titleField.errors?.['required']) {
+          Title is required
+          } @else if (titleField.errors?.['minlength']) {
+          Title must be at least 3 characters
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" [(ngModel)]="description" placeholder="Describe your event..."
+          rows="4"></textarea>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date">Date *</label>
+        <input type="date" id="date" name="date" [(ngModel)]="date" required #dateField="ngModel"
+          [class.invalid]="dateField.invalid && dateField.touched">
+        @if (dateField.invalid && dateField.touched) {
+        <div class="error-text">Date is required</div>
+        }
+      </div>
+
+      <!-- Time -->
+      <div class="form-group">
+        <label for="time">Time *</label>
+        <input type="time" id="time" name="time" [(ngModel)]="time" required #timeField="ngModel"
+          [class.invalid]="timeField.invalid && timeField.touched">
+        @if (timeField.invalid && timeField.touched) {
+        <div class="error-text">Time is required</div>
+        }
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label for="location">Location *</label>
+        <input type="text" id="location" name="location" [(ngModel)]="location"
+          placeholder="e.g., Conference Room A, Online Meeting" required #locationField="ngModel"
+          [class.invalid]="locationField.invalid && locationField.touched">
+        @if (locationField.invalid && locationField.touched) {
+        <div class="error-text">Location is required</div>
+        }
+      </div>
+
+      <!-- Error Message -->
+      @if (errorMessage) {
+      <div class="alert alert-error">
+        {{ errorMessage }}
+      </div>
+      }
+
+      <!-- Success Message -->
+      @if (successMessage) {
+      <div class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      }
+
+      <!-- Buttons -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()" [disabled]="isSubmitting">
+          Cancel
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="eventForm.invalid || isSubmitting">
+          @if (isSubmitting) {
+          <span class="spinner"></span>
+          Creating...
+          } @else {
+          Create Event
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

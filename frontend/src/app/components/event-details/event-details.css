@@ -1,0 +1,441 @@
+.event-details-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+/* Loading & Error States */
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.error-state h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.error-state p {
+  margin: 0 0 1.5rem 0;
+  opacity: 0.9;
+}
+
+/* Main Content */
+.event-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.btn-back {
+  padding: 0.625rem 1.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-delete {
+  padding: 0.625rem 1.25rem;
+  background: #f56565;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  background: #e53e3e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
+}
+
+/* Cards */
+.event-card,
+.attendees-card,
+.invite-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Event Title Section */
+.event-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.event-title-section h1 {
+  margin: 0;
+  color: #2d3748;
+  font-size: 2rem;
+  flex: 1;
+}
+
+.event-description {
+  color: #718096;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Event Info Grid */
+.event-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.info-icon {
+  font-size: 2rem;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-bottom: 0.25rem;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Response Section */
+.response-section {
+  border-top: 2px solid #e2e8f0;
+  padding-top: 1.5rem;
+}
+
+.response-section h3 {
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+}
+
+.current-status {
+  margin-bottom: 1rem;
+}
+
+.response-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-response {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-response:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-going {
+  color: #22543d;
+}
+
+.btn-going:hover:not(:disabled),
+.btn-going.active {
+  background: #c6f6d5;
+  border-color: #22543d;
+}
+
+.btn-maybe {
+  color: #7c2d12;
+}
+
+.btn-maybe:hover:not(:disabled),
+.btn-maybe.active {
+  background: #feebc8;
+  border-color: #7c2d12;
+}
+
+.btn-not-going {
+  color: #742a2a;
+}
+
+.btn-not-going:hover:not(:disabled),
+.btn-not-going.active {
+  background: #fed7d7;
+  border-color: #742a2a;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge.role-organizer {
+  background: #bee3f8;
+  color: #2c5282;
+}
+
+.badge.role-attendee {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.badge.status-going {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.badge.status-maybe {
+  background: #feebc8;
+  color: #7c2d12;
+}
+
+.badge.status-not-going {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.badge.status-pending {
+  background: #e2e8f0;
+  color: #2d3748;
+}
+
+/* Attendees */
+.attendees-card h2,
+.invite-card h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2d3748;
+  font-size: 1.5rem;
+}
+
+.attendees-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.attendee-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.attendee-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.attendee-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #667eea;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.attendee-email {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.attendee-role {
+  font-size: 0.85rem;
+  color: #718096;
+  text-transform: capitalize;
+}
+
+.empty-message {
+  color: #718096;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Invite Form */
+.invite-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.invite-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.invite-form input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.invite-form input:disabled {
+  background: #f7fafc;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #5568d3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Alerts */
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.alert-success {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.alert-error {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .event-details-container {
+    padding: 1rem;
+  }
+
+  .event-card,
+  .attendees-card,
+  .invite-card {
+    padding: 1.5rem;
+  }
+
+  .event-title-section {
+    flex-direction: column;
+  }
+
+  .event-title-section h1 {
+    font-size: 1.5rem;
+  }
+
+  .event-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .response-buttons {
+    flex-direction: column;
+  }
+
+  .btn-response {
+    width: 100%;
+  }
+
+  .invite-form {
+    flex-direction: column;
+  }
+
+  .attendee-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

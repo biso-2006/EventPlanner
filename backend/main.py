@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.auth_routes import auth_router
+from routes.event_routes import event_router
 
 app = FastAPI(title="EventPlanner API")
 
@@ -14,6 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(event_router)
 
 @app.get("/")
 def root():

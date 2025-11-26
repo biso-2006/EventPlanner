@@ -1,0 +1,170 @@
+<div class="event-details-container">
+  <!-- Loading State -->
+  @if (isLoading()) {
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading event details...</p>
+  </div>
+  }
+
+  <!-- Error State -->
+  @if (errorMessage() && !isLoading()) {
+  <div class="error-state">
+    <div class="error-icon">⚠️</div>
+    <h2>Error Loading Event</h2>
+    <p>{{ errorMessage() }}</p>
+    <button class="btn-primary" (click)="goBack()">Back to Home</button>
+  </div>
+  }
+
+  <!-- Event Content -->
+  @if (event() && !isLoading()) {
+  <div class="event-content">
+    <!-- Header -->
+    <div class="event-header">
+      <button class="btn-back" (click)="goBack()">
+        ← Back
+      </button>
+      @if (isOrganizer()) {
+      <button class="btn-delete" (click)="deleteEvent()">
+        🗑️ Delete Event
+      </button>
+      }
+    </div>
+
+    <!-- Event Info Card -->
+    <div class="event-card">
+      <div class="event-title-section">
+        <h1>{{ event()!.title }}</h1>
+        @if (event()!.user_role) {
+        <span class="badge role-{{ event()!.user_role }}">
+          {{ event()!.user_role }}
+        </span>
+        }
+      </div>
+
+      @if (event()!.description) {
+      <p class="event-description">{{ event()!.description }}</p>
+      }
+
+      <div class="event-info-grid">
+        <div class="info-item">
+          <span class="info-icon">📅</span>
+          <div>
+            <div class="info-label">Date</div>
+            <div class="info-value">{{ event()!.date }}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-icon">🕐</span>
+          <div>
+            <div class="info-label">Time</div>
+            <div class="info-value">{{ event()!.time }}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">{{ event()!.location }}</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-icon">👤</span>
+          <div>
+            <div class="info-label">Organizer</div>
+            <div class="info-value">{{ event()!.organizer_email }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Response Buttons (for attendees) -->
+      @if (!isOrganizer() && event()!.user_role === 'attendee') {
+      <div class="response-section">
+        <h3>Your Response</h3>
+        @if (event()!.user_status) {
+        <div class="current-status">
+          <span class="badge" [ngClass]="getStatusBadgeClass(event()!.user_status!)">
+            {{ getStatusLabel(event()!.user_status!) }}
+          </span>
+        </div>
+        }
+        <div class="response-buttons">
+          <button class="btn-response btn-going" (click)="respondToEvent('going')" [disabled]="isResponding()"
+            [class.active]="event()!.user_status === 'going'">
+            ✓ Going
+          </button>
+          <button class="btn-response btn-maybe" (click)="respondToEvent('maybe')" [disabled]="isResponding()"
+            [class.active]="event()!.user_status === 'maybe'">
+            ? Maybe
+          </button>
+          <button class="btn-response btn-not-going" (click)="respondToEvent('not_going')" [disabled]="isResponding()"
+            [class.active]="event()!.user_status === 'not_going'">
+            ✗ Not Going
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Attendees Section -->
+    <div class="attendees-card">
+      <h2>Attendees ({{ event()!.attendees?.length || 0 }})</h2>
+
+      @if (event()!.attendees && event()!.attendees!.length > 0) {
+      <div class="attendees-list">
+        @for (attendee of event()!.attendees; track attendee.email) {
+        <div class="attendee-item">
+          <div class="attendee-info">
+            <div class="attendee-avatar">
+              {{ attendee.email.charAt(0).toUpperCase() }}
+            </div>
+            <div>
+              <div class="attendee-email">{{ attendee.email }}</div>
+              <div class="attendee-role">{{ attendee.role }}</div>
+            </div>
+          </div>
+          <span class="badge" [ngClass]="getStatusBadgeClass(attendee.status)">
+            {{ getStatusLabel(attendee.status) }}
+          </span>
+        </div>
+        }
+      </div>
+      } @else {
+      <p class="empty-message">No attendees yet</p>
+      }
+    </div>
+
+    <!-- Invite Section (for organizers) -->
+    @if (canInvite()) {
+    <div class="invite-card">
+      <h2>Invite Attendees</h2>
+
+      @if (inviteSuccess()) {
+      <div class="alert alert-success">{{ inviteSuccess() }}</div>
+      }
+
+      @if (inviteError()) {
+      <div class="alert alert-error">{{ inviteError() }}</div>
+      }
+
+      <div class="invite-form">
+        <input type="email" placeholder="Enter email address" [(ngModel)]="inviteEmail" (keyup.enter)="inviteUser()"
+          [disabled]="isInviting()">
+        <button class="btn-primary" (click)="inviteUser()" [disabled]="isInviting() || !inviteEmail.trim()">
+          @if (isInviting()) {
+          <span class="spinner-small"></span>
+          Sending...
+          } @else {
+          Send Invitation
+          }
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
