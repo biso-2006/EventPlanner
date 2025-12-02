@@ -41,6 +41,12 @@
 
         <input type="date" class="filter-input" placeholder="To Date" [(ngModel)]="dateTo">
 
+        <select class="filter-input" [(ngModel)]="roleFilter">
+          <option value="">All Roles</option>
+          <option value="organizer">Organizer</option>
+          <option value="attendee">Attendee</option>
+        </select>
+
         <button class="btn-filter" (click)="applyFilters()">Search</button>
         <button class="btn-clear" (click)="clearFilters(); loadEvents()">Clear</button>
       </div>

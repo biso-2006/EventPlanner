@@ -25,6 +25,7 @@ export class Home implements OnInit {
   searchQuery = '';
   dateFrom = '';
   dateTo = '';
+  roleFilter = '';
 
   constructor(
     private authService: Auth,
@@ -44,7 +45,8 @@ export class Home implements OnInit {
       ? this.eventService.getAllEvents(
         this.searchQuery || undefined,
         this.dateFrom || undefined,
-        this.dateTo || undefined
+        this.dateTo || undefined,
+        this.roleFilter || undefined
       )
       : this.eventService.getInvitations();
 
@@ -75,6 +77,7 @@ export class Home implements OnInit {
     this.searchQuery = '';
     this.dateFrom = '';
     this.dateTo = '';
+    this.roleFilter = '';
   }
 
   createEvent() {
