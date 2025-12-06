@@ -14,6 +14,8 @@ services:
       - ./backend/.env
     volumes:
       - ./backend:/app
+    depends_on:
+      - mongo
     networks:
       - eventplanner-network
 
@@ -34,6 +36,25 @@ services:
     networks:
       - eventplanner-network
 
+  # MongoDB
+  mongo:
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+    container_name: eventplanner-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - eventplanner-network
+
+# Volumes
+volumes:
+  mongo-data:
+
+# Networks
 networks:
   eventplanner-network:
     driver: bridge
