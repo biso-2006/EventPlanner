@@ -1,20 +1,16 @@
-# Use Node 20 alpine for smaller size
-FROM node:20-alpine
-
-# Set working directory
+# -------- Build stage --------
+FROM node:20-alpine AS build
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy application code
 COPY . .
+RUN npm run build
 
-# Expose port
-EXPOSE 4200
+# -------- Runtime stage --------
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Run the application in development mode
-CMD ["npm", "start", "--", "--host", "0.0.0.0", "--port", "4200"]
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
