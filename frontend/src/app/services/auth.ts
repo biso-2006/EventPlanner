@@ -22,7 +22,7 @@ interface UserResponse {
   providedIn: 'root'
 })
 export class Auth {
-  private apiUrl = 'http://localhost:8000/auth';
+  private apiUrl = 'https://git-backend-ahmad-elhawwary-dev.apps.rm3.7wse.p1.openshiftapps.com/auth';
   private tokenKey = 'auth_token';
   private userEmailKey = 'user_email';
   private platformId = inject(PLATFORM_ID);

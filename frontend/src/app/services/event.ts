@@ -44,7 +44,7 @@ export interface EventResponse {
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8000/events';
+  private apiUrl = 'https://git-backend-ahmad-elhawwary-dev.apps.rm3.7wse.p1.openshiftapps.com/events';
 
   constructor(private http: HttpClient, private authService: Auth) { }
 
