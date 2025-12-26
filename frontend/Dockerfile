@@ -4,6 +4,9 @@ FROM nginx:alpine
 # Copy pre-built Angular app from dist folder
 COPY dist/frontend/browser /usr/share/nginx/html
 
+# Angular SSR creates index.csr.html, rename it to index.html
+RUN mv /usr/share/nginx/html/index.csr.html /usr/share/nginx/html/index.html
+
 # Copy custom nginx config for Angular routing
 RUN echo 'server { \
     listen 8080; \
