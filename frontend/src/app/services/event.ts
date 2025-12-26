@@ -64,7 +64,7 @@ export class EventService {
     if (dateTo) params = params.set('date_to', dateTo);
     if (role) params = params.set('role', role);
 
-    return this.http.get<Event[]>(this.apiUrl, {
+    return this.http.get<Event[]>(`${this.apiUrl}/`, {
       headers: this.getHeaders(),
       params
     });
@@ -93,7 +93,7 @@ export class EventService {
 
   // Create event
   createEvent(event: EventCreate): Observable<Event> {
-    return this.http.post<Event>(this.apiUrl, event, {
+    return this.http.post<Event>(`${this.apiUrl}/`, event, {
       headers: this.getHeaders()
     });
   }
