@@ -1,28 +1,8 @@
-# Build stage
-FROM node:20-alpine AS builder
-
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy application code
-COPY . .
-
-# Build for production and show what was created
-RUN npm run build && \
-    echo "=== Checking dist structure ===" && \
-    find dist -type f | head -20
-
-# Production stage
+# Use nginx to serve pre-built static files
 FROM nginx:alpine
 
-# Copy built files - Angular with outputMode server creates dist/server for SSR
-# For static deployment, we need the browser output which is in dist/browser
-COPY --from=builder /app/dist/frontend/browser /usr/share/nginx/html
+# Copy pre-built Angular app from dist folder
+COPY dist/frontend/browser /usr/share/nginx/html
 
 # Copy custom nginx config for Angular routing
 RUN echo 'server { \
