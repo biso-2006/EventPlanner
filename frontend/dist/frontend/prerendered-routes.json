@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/": {},
+    "/auth/login": {},
+    "/auth/signup": {},
+    "/create-event": {},
+    "/home": {}
+  }
+}
